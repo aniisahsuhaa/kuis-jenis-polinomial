@@ -8,6 +8,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
+
     <style>
       * {
         margin: 0;
@@ -80,7 +81,7 @@
 
       .drag-container {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1.5fr 1fr;
         gap: 20px;
         margin-bottom: 20px;
       }
@@ -167,18 +168,7 @@
       }
 
       .drop-zone::before {
-        content: "";
-        background: #ffb347;
-        color: white;
-        width: 28px;
-        height: 28px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: bold;
-        font-size: 14px;
-        flex-shrink: 0;
+        content: none;
       }
 
       .drop-zone.drag-over {
@@ -221,7 +211,7 @@
       }
 
       .drop-zone.filled .drop-zone-label {
-        font-size: 12px;
+        font-size: 5px;
         color: #666;
       }
 
@@ -384,10 +374,8 @@
       .pembahasan {
         display: none;
         margin-top: 30px;
-        background: #fff9f0;
+        background: #ffffff;
         padding: 20px;
-        border-radius: 12px;
-        border: 2px solid #ffe4cc;
       }
 
       .pembahasan.show {
@@ -414,12 +402,27 @@
         border-left: 4px solid #ffb347;
       }
 
+      .pembahasan-item.correct-answer {
+        background: #f1f8f4;
+        border-left: 4px solid #4caf50;
+      }
+
+      .pembahasan-item.wrong-answer {
+        background: #ffebee;
+        border-left: 4px solid #f44336;
+      }
+
       .pembahasan-item h4 {
         color: #ff8c42;
         margin-bottom: 10px;
         display: flex;
         align-items: center;
         gap: 8px;
+      }
+
+      .pembahasan-item p {
+        margin-bottom: 8px;
+        line-height: 1.6;
       }
 
       .correct {
@@ -454,21 +457,113 @@
         font-size: 16px;
       }
 
-      @media (max-width: 600px) {
+      @media (max-width: 768px) {
+        body {
+          padding: 10px;
+        }
+
         .header h1 {
           font-size: 20px;
         }
 
+        .header p {
+          font-size: 13px;
+        }
+
+        .content {
+          padding: 20px 15px;
+        }
+
         .drag-container {
-          gap: 15px;
+          gap: 10px;
         }
 
         .column {
-          padding: 15px;
-          min-height: 350px;
+          padding: 12px;
+          min-height: 320px;
+        }
+
+        .column-header {
+          font-size: 14px;
+          margin-bottom: 15px;
+        }
+
+        .drag-item {
+          padding: 10px;
+          margin-bottom: 8px;
+          gap: 8px;
+        }
+
+        .item-number {
+          width: 24px;
+          height: 24px;
+          font-size: 12px;
         }
 
         .item-content {
+          font-size: 14px;
+        }
+
+        .drop-zone {
+          padding: 10px;
+          margin-bottom: 8px;
+          gap: 8px;
+          min-height: 50px;
+        }
+
+        .drop-zone::before {
+          content: none;
+        }
+
+        .drop-zone-label {
+          font-size: 11px;
+        }
+
+        .dropped-item {
+          padding: 6px 10px;
+          font-size: 13px;
+        }
+
+        .remove-btn {
+          width: 20px;
+          height: 20px;
+          font-size: 12px;
+        }
+
+        .instruction {
+          padding: 12px 15px;
+          gap: 10px;
+        }
+
+        .instruction i {
+          font-size: 16px;
+        }
+
+        .instruction-text {
+          font-size: 13px;
+        }
+
+        .mc-question {
+          padding: 15px;
+        }
+
+        .question-number {
+          width: 28px;
+          height: 28px;
+          font-size: 14px;
+        }
+
+        .question-text {
+          font-size: 14px;
+        }
+
+        .option {
+          padding: 10px 12px;
+          font-size: 14px;
+        }
+
+        .btn {
+          padding: 12px 30px;
           font-size: 16px;
         }
 
@@ -476,8 +571,76 @@
           font-size: 36px;
         }
 
-        .instruction-text {
+        .result {
+          padding: 20px;
+        }
+
+        .pembahasan {
+          padding: 15px;
+        }
+
+        .pembahasan-header {
+          font-size: 18px;
+        }
+
+        .pembahasan-item {
+          padding: 12px;
           font-size: 14px;
+        }
+
+        .pembahasan-item h4 {
+          font-size: 15px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .column-header {
+          font-size: 12px;
+        }
+
+        .item-content {
+          font-size: 13px;
+        }
+
+        .drop-zone-label {
+          font-size: 10px;
+        }
+
+        .dropped-item {
+          font-size: 12px;
+        }
+      }
+
+      .alert {
+        display: none;
+        background: #ff6b6b;
+        color: white;
+        padding: 15px 20px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        text-align: center;
+        font-weight: bold;
+        animation: shake 0.5s;
+      }
+
+      .alert.show {
+        display: block;
+      }
+
+      .alert i {
+        margin-right: 8px;
+      }
+
+      @keyframes shake {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        25% {
+          transform: translateX(-10px);
+        }
+        75% {
+          transform: translateX(10px);
         }
       }
     </style>
@@ -491,7 +654,6 @@
 
       <div class="content">
         <div class="instruction">
-          <i class="fas fa-hand-pointer"></i>
           <div class="instruction-text">
             <strong>Instruksi:</strong> Seret bentuk polinomial dari kolom kiri
             ke jenis yang sesuai di kolom kanan. Tekan dan tahan pada bentuk
@@ -527,7 +689,7 @@
                 class="drag-item"
                 draggable="true"
                 data-id="3"
-                data-content="7"
+                data-content="7x⁵"
               >
                 <div class="item-number">3</div>
                 <div class="item-content">7x⁵</div>
@@ -545,10 +707,10 @@
                 class="drag-item"
                 draggable="true"
                 data-id="5"
-                data-content="2x⁵ + 3x³ - x² + 6x"
+                data-content="2x⁵ + 3 - x² + 6x"
               >
                 <div class="item-number">5</div>
-                <div class="item-content">2x⁵ + 3x³ - x² + 6x</div>
+                <div class="item-content">2x⁵ + 3 - x² + 6x</div>
               </div>
             </div>
 
@@ -558,7 +720,7 @@
               </div>
               <div class="drop-zone" data-answer="1" data-type="monomial">
                 <div class="drop-zone-content">
-                  <span class="drop-zone-label">Monomial (1 suku)</span>
+                  <span class="drop-zone-label">Monomial</span>
                   <span class="dropped-item"></span>
                 </div>
                 <button class="remove-btn" onclick="removeFromZone(this)">
@@ -567,7 +729,7 @@
               </div>
               <div class="drop-zone" data-answer="2" data-type="binomial">
                 <div class="drop-zone-content">
-                  <span class="drop-zone-label">Binomial (2 suku)</span>
+                  <span class="drop-zone-label">Binomial</span>
                   <span class="dropped-item"></span>
                 </div>
                 <button class="remove-btn" onclick="removeFromZone(this)">
@@ -576,7 +738,7 @@
               </div>
               <div class="drop-zone" data-answer="3" data-type="monomial">
                 <div class="drop-zone-content">
-                  <span class="drop-zone-label">Monomial (1 suku)</span>
+                  <span class="drop-zone-label">Monomial</span>
                   <span class="dropped-item"></span>
                 </div>
                 <button class="remove-btn" onclick="removeFromZone(this)">
@@ -585,7 +747,7 @@
               </div>
               <div class="drop-zone" data-answer="4" data-type="trinomial">
                 <div class="drop-zone-content">
-                  <span class="drop-zone-label">Trinomial (3 suku)</span>
+                  <span class="drop-zone-label">Trinomial</span>
                   <span class="dropped-item"></span>
                 </div>
                 <button class="remove-btn" onclick="removeFromZone(this)">
@@ -594,7 +756,7 @@
               </div>
               <div class="drop-zone" data-answer="5" data-type="polinomial">
                 <div class="drop-zone-content">
-                  <span class="drop-zone-label">Polinomial (>3 suku)</span>
+                  <span class="drop-zone-label">Polinomial</span>
                   <span class="dropped-item"></span>
                 </div>
                 <button class="remove-btn" onclick="removeFromZone(this)">
@@ -606,7 +768,6 @@
         </div>
 
         <div class="instruction">
-          <i class="fas fa-list-check"></i>
           <div class="instruction-text">
             <strong>Instruksi:</strong> Pilih jawaban yang benar untuk soal-soal
             di bawah ini.
@@ -678,7 +839,7 @@
             <div class="question-header">
               <div class="question-number">8</div>
               <div class="question-text">
-                Jenis polinomial dari 6x⁵ - 3x³ + 2x² - x + 9 adalah...
+                Bentuk aljabar 6x⁵ - 3x³ + 2x² - x + 9 dinamakan sebagai...
               </div>
             </div>
             <div class="options">
@@ -696,8 +857,7 @@
               </label>
               <label class="option">
                 <input type="radio" name="q8" value="d" />
-                <span class="option-label">D.</span> Polinomial (lebih dari 3
-                suku)
+                <span class="option-label">D.</span> Polinomial
               </label>
               <label class="option">
                 <input type="radio" name="q8" value="e" />
@@ -705,6 +865,11 @@
               </label>
             </div>
           </div>
+        </div>
+
+        <div class="alert" id="alert">
+          <i class="fas fa-exclamation-triangle"></i>
+          <span id="alertMessage">Harap isi semua soal terlebih dahulu!</span>
         </div>
 
         <div class="button-container">
@@ -738,6 +903,30 @@
     </div>
 
     <script>
+      // Fungsi untuk mengacak array
+      function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+      }
+
+      // Acak drop zones (Jenis Polinomial) saat halaman dimuat
+      window.addEventListener("DOMContentLoaded", () => {
+        const container = document.querySelectorAll(".column")[1]; // Kolom kedua (Jenis Polinomial)
+        const header = container.querySelector(".column-header");
+        const zones = Array.from(document.querySelectorAll(".drop-zone"));
+
+        // Acak zones
+        const shuffledZones = shuffleArray(zones);
+
+        // Hapus semua zones dari container
+        zones.forEach((zone) => zone.remove());
+
+        // Tambahkan kembali dalam urutan acak
+        shuffledZones.forEach((zone) => container.appendChild(zone));
+      });
       let draggedElement = null;
       const dropZones = document.querySelectorAll(".drop-zone");
       const dragItems = document.querySelectorAll(".drag-item");
@@ -817,8 +1006,9 @@
         const itemContent = item.dataset.content;
         const itemId = item.dataset.id;
 
-        droppedItem.textContent = itemContent;
+        droppedItem.textContent = itemId; // Ubah dari itemContent menjadi itemId
         zone.dataset.userAnswer = itemId;
+        zone.dataset.userContent = itemContent; // Tambahkan ini untuk menyimpan konten asli
         zone.classList.add("filled");
       }
 
@@ -846,6 +1036,38 @@
       });
 
       function cekJawaban() {
+        const alert = document.getElementById("alert");
+        const alertMessage = document.getElementById("alertMessage");
+        let dragFilled = 0;
+        dropZones.forEach((zone) => {
+          if (zone.dataset.userAnswer) {
+            dragFilled++;
+          }
+        });
+        const q6Filled = document.querySelector('input[name="q6"]:checked');
+        const q7Filled = document.querySelector('input[name="q7"]:checked');
+        const q8Filled = document.querySelector('input[name="q8"]:checked');
+        if (dragFilled < 5) {
+          alertMessage.textContent = `Harap isi semua soal drag and drop! (${dragFilled}/5 terisi)`;
+          alert.classList.add("show");
+          alert.scrollIntoView({ behavior: "smooth", block: "center" });
+          setTimeout(() => alert.classList.remove("show"), 3000);
+          return;
+        }
+
+        if (!q6Filled || !q7Filled || !q8Filled) {
+          let mcFilled = 0;
+          if (q6Filled) mcFilled++;
+          if (q7Filled) mcFilled++;
+          if (q8Filled) mcFilled++;
+          alertMessage.textContent = `Harap isi semua soal pilihan ganda! (${mcFilled}/3 terisi)`;
+          alert.classList.add("show");
+          alert.scrollIntoView({ behavior: "smooth", block: "center" });
+          setTimeout(() => alert.classList.remove("show"), 3000);
+          return;
+        }
+        alert.classList.remove("show");
+
         let score = 0;
         const pembahasan = [];
 
@@ -855,81 +1077,103 @@
             soal: "5x²",
             jenis: "Monomial",
             explanation:
-              "Monomial memiliki 1 suku. Bentuk 5x² hanya terdiri dari satu suku.",
+              "Bentuk 5x² hanya terdiri dari satu suku, jadi 5x² adalah monomial",
           },
           2: {
             correct: "2",
             soal: "3x³ + 2x",
             jenis: "Binomial",
             explanation:
-              "Binomial memiliki 2 suku. Bentuk 3x³ + 2x terdiri dari dua suku: 3x³ dan 2x.",
+              "Bentuk 3x³ + 2x terdiri dari dua suku: 3x³ dan 2x, jadi 3x³ + 2x adalah binomial",
           },
           3: {
             correct: "3",
             soal: "7x⁵",
             jenis: "Monomial",
             explanation:
-              "Monomial memiliki 1 suku. Bentuk 7x⁵ hanya terdiri dari satu suku.",
+              "Bentuk 7x⁵ hanya terdiri dari satu suku, jadi 7x⁵ adalah monomial",
           },
           4: {
             correct: "4",
             soal: "4x⁴ - 2x² + 9",
             jenis: "Trinomial",
             explanation:
-              "Trinomial memiliki 3 suku. Bentuk 4x⁴ - 2x² + 9 terdiri dari tiga suku: 4x⁴, -2x², dan 9.",
+              "Bentuk 4x⁴ - 2x² + 9 terdiri dari tiga suku: 4x⁴, -2x², dan 9, jadi 4x⁴ - 2x² + 9 adalah trinomial",
           },
           5: {
             correct: "5",
-            soal: "2x⁵ + 3x³ - x² + 6x",
+            soal: "2x⁵ + 3 - x² + 6x",
             jenis: "Polinomial",
             explanation:
-              "Polinomial dengan lebih dari 3 suku. Bentuk ini memiliki 4 suku: 2x⁵, 3x³, -x², dan 6x.",
+              "Bentuk ini memiliki 4 suku: 2x⁵, 3, -x², dan 6x, jadi 2x⁵ + 3 - x² + 6x adalah polinomial",
           },
         };
 
+        // Kumpulkan jawaban drag and drop berdasarkan nomor soal
+        const dragResults = {};
+        const userDroppedTo = {}; // Menyimpan di mana user men-drop setiap soal
+
+        // Loop untuk mencatat di mana user men-drop setiap soal
         dropZones.forEach((zone) => {
-          const questionNum = zone.dataset.answer;
-          const userAnswer = zone.dataset.userAnswer;
-          const correctAnswer = dragAnswers[questionNum].correct;
-          const isCorrect = userAnswer === correctAnswer;
+          const userAnswer = zone.dataset.userAnswer; // ID soal yang di-drop (1-5)
 
-          if (isCorrect) score++;
-
-          const userSoal = userAnswer
-            ? dragAnswers[userAnswer].soal
-            : "Tidak dijawab";
-
-          pembahasan.push({
-            num: questionNum,
-            soal: dragAnswers[questionNum].soal,
-            jenis: dragAnswers[questionNum].jenis,
-            correct: `Soal ${correctAnswer}: ${dragAnswers[correctAnswer].soal}`,
-            user: userAnswer
-              ? `Soal ${userAnswer}: ${userSoal}`
-              : "Tidak dijawab",
-            isCorrect: isCorrect,
-            explanation: dragAnswers[questionNum].explanation,
-          });
+          if (userAnswer) {
+            // Simpan jenis zone tempat soal ini di-drop
+            const userJenis =
+              zone.dataset.type.charAt(0).toUpperCase() +
+              zone.dataset.type.slice(1);
+            userDroppedTo[userAnswer] = userJenis;
+          }
         });
+
+        // Loop untuk membuat pembahasan untuk setiap soal (1-5)
+        for (let soalNum = 1; soalNum <= 5; soalNum++) {
+          const correctJenis = dragAnswers[soalNum].jenis;
+          const userJenis = userDroppedTo[soalNum] || "Tidak dijawab";
+          const isCorrect =
+            userJenis.toLowerCase() === correctJenis.toLowerCase();
+
+          if (isCorrect && userJenis !== "Tidak dijawab") score++;
+
+          dragResults[soalNum] = {
+            num: soalNum,
+            soal: dragAnswers[soalNum].soal,
+            correctJenis: correctJenis,
+            userJenis: userJenis,
+            isCorrect: isCorrect,
+            explanation: dragAnswers[soalNum].explanation,
+          };
+        }
+
+        // Tambahkan hasil drag and drop ke pembahasan dalam urutan nomor
+        for (let i = 1; i <= 5; i++) {
+          if (dragResults[i]) {
+            pembahasan.push(dragResults[i]);
+          }
+        }
 
         const mcAnswers = {
           q6: {
             correct: "b",
+            correctText: "B. 3x - 7",
             num: 6,
-            explanation:
-              "Jawaban yang benar adalah B (3x - 7). Binomial memiliki 2 suku, yaitu 3x dan -7.",
+            questionText: "Manakah yang termasuk binomial?",
+            explanation: "Binomial memiliki 2 suku, yaitu 3x dan -7.",
           },
           q7: {
             correct: "c",
+            correctText: "C. 3 suku",
             num: 7,
-            explanation:
-              'Jawaban yang benar adalah C (3 suku). Trinomial berasal dari kata "tri" yang berarti tiga.',
+            questionText: "Berapa jumlah suku pada trinomial?",
+            explanation: 'Trinomial berasal dari kata "tri" yang berarti tiga.',
           },
           q8: {
             correct: "d",
+            correctText: "D. Polinomial",
             num: 8,
-            explanation:
-              "Jawaban yang benar adalah D. Polinomial 6x⁵ - 3x³ + 2x² - x + 9 memiliki 5 suku (lebih dari 3 suku).",
+            questionText:
+              "Bentuk aljabar 6x⁵ - 3x³ + 2x² - x + 9 dinamakan sebagai...",
+            explanation: "Polinomial, karena memiliki 5 suku.",
           },
         };
 
@@ -940,10 +1184,19 @@
 
           if (isCorrect) score++;
 
+          let userText = "Tidak dijawab";
+          if (userAnswer) {
+            const selectedOption = document.querySelector(
+              `input[name="${q}"][value="${userAnswer}"]`
+            ).parentElement;
+            userText = selectedOption.textContent.trim();
+          }
+
           pembahasan.push({
             num: mcAnswers[q].num,
-            correct: mcAnswers[q].correct.toUpperCase(),
-            user: userAnswer ? userAnswer.toUpperCase() : "Tidak dijawab",
+            questionText: mcAnswers[q].questionText,
+            correctText: mcAnswers[q].correctText,
+            userText: userText,
             isCorrect: isCorrect,
             explanation: mcAnswers[q].explanation,
           });
@@ -954,28 +1207,29 @@
 
         let pembahasanHTML = "";
         pembahasan.forEach((item) => {
-          const statusClass = item.isCorrect ? "correct" : "incorrect";
-          const icon = item.isCorrect ? "fa-check-circle" : "fa-times-circle";
+          const userClass = item.isCorrect ? "correct" : "incorrect";
+          const boxClass = item.isCorrect ? "correct-answer" : "wrong-answer";
 
           if (item.num <= 5) {
             pembahasanHTML += `
-                        <div class="pembahasan-item">
-                            <h4><i class="fas ${icon}"></i> Soal ${item.num}: ${item.soal}</h4>
-                            <p><strong>Jenis:</strong> ${item.jenis}</p>
-                            <p><strong>Jawaban Anda:</strong> <span class="${statusClass}">${item.user}</span></p>
-                            <p><strong>Jawaban Benar:</strong> <span class="correct">${item.correct}</span></p>
-                            <p><strong>Pembahasan:</strong> ${item.explanation}</p>
-                        </div>
-                    `;
+    <div class="pembahasan-item ${boxClass}">
+      <h4>Soal ${item.num}</h4>
+      <p>(${item.soal})</p>
+      <p><strong>Jawabanmu:</strong> <span class="${userClass}">${item.userJenis}</span></p>
+      <p><strong>Jawaban Benar:</strong> <span class="correct">${item.correctJenis}</span></p>
+      <p><strong>Pembahasan:</strong> ${item.explanation}</p>
+    </div>
+  `;
           } else {
             pembahasanHTML += `
-                        <div class="pembahasan-item">
-                            <h4><i class="fas ${icon}"></i> Soal ${item.num}</h4>
-                            <p><strong>Jawaban Anda:</strong> <span class="${statusClass}">${item.user}</span></p>
-                            <p><strong>Jawaban Benar:</strong> <span class="correct">${item.correct}</span></p>
-                            <p><strong>Pembahasan:</strong> ${item.explanation}</p>
-                        </div>
-                    `;
+    <div class="pembahasan-item ${boxClass}">
+      <h4>Soal ${item.num}</h4>
+      <p>(${item.questionText})</p>
+      <p><strong>Jawabanmu:</strong> <span class="${userClass}">${item.userText}</span></p>
+      <p><strong>Jawaban Benar:</strong> <span class="correct">${item.correctText}</span></p>
+      <p><strong>Pembahasan:</strong> ${item.explanation}</p>
+    </div>
+  `;
           }
         });
 
